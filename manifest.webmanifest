@@ -1,0 +1,10 @@
+{
+  "name": "TRACKER VEDA",
+  "short_name": "Tracker Veda",
+  "description": "Meet, track prospects, and never miss a follow-up.",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#f3f8fb",
+  "theme_color": "#082d42",
+  "icons": []
+}

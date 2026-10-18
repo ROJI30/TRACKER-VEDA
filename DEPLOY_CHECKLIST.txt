@@ -1,0 +1,14 @@
+TRACKER VEDA — LOCAL-ONLY DEPLOY CHECKLIST
+
+[ ] Extract the ZIP.
+[ ] Open index.html in a modern browser to test, or upload the files to a GitHub repository.
+[ ] In GitHub, enable Pages for the repository/branch containing index.html.
+[ ] Open the published HTTPS URL and test adding, editing, searching, and deleting prospects.
+[ ] Test 3-day and 7-day follow-up tracking, tasks, calendar, reports, and light/dark mode.
+[ ] Test Settings → Export backup and Import backup.
+[ ] Optionally grant browser notification permission and test while the app is open.
+[ ] Keep regular JSON backups; local browser storage is not a cloud backup.
+
+NO SUPABASE, FIREBASE, EXTERNAL DATABASE, OR LOGIN SETUP IS REQUIRED.
+
+Important: each browser/device has its own data. Agent names are labels only; the app does not support shared team accounts or automatic cross-device sync.
