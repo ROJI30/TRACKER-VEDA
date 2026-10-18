@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f5f8fc">
+  <title>TRACKER VEDA</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <a class="brand" href="#dashboard" aria-label="Tracker Veda home">
+        <span class="brand-mark">V</span>
+        <span class="brand-copy"><strong>TRACKER VEDA</strong><small>Prospect manager</small></span>
+      </a>
+      <div class="top-actions">
+        <span class="today-label" id="todayLabel"></span>
+        <button class="icon-btn" id="themeToggle" type="button" aria-label="Switch theme" title="Switch theme"><span id="themeIcon">☾</span></button>
+        <button class="primary-btn top-add" id="addProspectTop" type="button"><span>＋</span> Add prospect</button>
+      </div>
+    </header>
+
+    <main id="mainContent">
+      <section class="view active" id="dashboardView" aria-labelledby="welcomeTitle">
+        <div class="welcome-row">
+          <div><p class="eyebrow">YOUR WORKSPACE</p><h1 id="welcomeTitle">Good to see you.</h1><p class="subheading">Keep your prospects moving forward.</p></div>
+          <button class="primary-btn hero-add" id="addProspectHero" type="button"><span>＋</span> Add prospect</button>
+        </div>
+        <div class="stats-grid">
+          <article class="stat-card"><div class="stat-top"><span class="stat-icon blue">◎</span><span class="stat-caption">ALL PROSPECTS</span></div><div class="stat-number" id="statTotal">0</div><div class="stat-foot">Every prospect in one place</div></article>
+          <article class="stat-card"><div class="stat-top"><span class="stat-icon green">↗</span><span class="stat-caption">ACTIVE</span></div><div class="stat-number" id="statActive">0</div><div class="stat-foot">Still in progress</div></article>
+          <article class="stat-card"><div class="stat-top"><span class="stat-icon amber">◷</span><span class="stat-caption">FOLLOW-UPS DUE</span></div><div class="stat-number" id="statDue">0</div><div class="stat-foot">Due today or overdue</div></article>
+          <article class="stat-card"><div class="stat-top"><span class="stat-icon violet">✓</span><span class="stat-caption">CONVERTED</span></div><div class="stat-number" id="statConverted">0</div><div class="stat-foot">Successfully closed</div></article>
+        </div>
+        <div class="content-grid">
+          <section class="panel recent-panel"><div class="panel-heading"><div><h2>Recent prospects</h2><p>Your latest updates</p></div><button class="text-btn" data-view="prospects" type="button">View all <span>→</span></button></div><div id="recentList" class="prospect-list"></div></section>
+          <section class="panel due-panel"><div class="panel-heading"><div><h2>Follow-ups</h2><p>What needs your attention</p></div><span class="small-count" id="dueCount">0</span></div><div id="dueList" class="due-list"></div></section>
+        </div>
+      </section>
+
+      <section class="view" id="prospectsView" aria-labelledby="prospectsTitle">
+        <div class="page-heading"><div><p class="eyebrow">YOUR CONTACTS</p><h1 id="prospectsTitle">Prospects</h1><p class="subheading">Manage your relationships and next steps.</p></div><button class="primary-btn" id="addProspectPage" type="button"><span>＋</span> Add prospect</button></div>
+        <div class="toolbar"><label class="searchbox"><span>⌕</span><input id="searchInput" type="search" placeholder="Search name, company or phone…" autocomplete="off"></label><label class="filter-wrap"><span class="sr-only">Filter prospects by status</span><select id="statusFilter"><option value="all">All statuses</option><option value="New">New</option><option value="Contacted">Contacted</option><option value="Interested">Interested</option><option value="Converted">Converted</option><option value="Not interested">Not interested</option></select></label></div>
+        <section class="panel table-panel"><div class="table-summary"><span id="prospectCount">0 prospects</span><span>Saved on this device</span></div><div id="prospectsList" class="prospect-list full-list"></div></section>
+      </section>
+
+      <section class="view" id="followupsView" aria-labelledby="followupsTitle">
+        <div class="page-heading"><div><p class="eyebrow">STAY ON TRACK</p><h1 id="followupsTitle">Follow-ups</h1><p class="subheading">Your next conversations, all in one place.</p></div></div>
+        <div class="followup-summary" id="followupSummary"></div>
+        <section class="panel"><div class="panel-heading followup-heading"><div><h2>Upcoming and overdue</h2><p>Open a prospect to update their next step.</p></div></div><div id="allDueList" class="due-list all-due-list"></div></section>
+      </section>
+    </main>
+
+    <nav class="bottom-nav" aria-label="Main navigation">
+      <button class="nav-item active" data-view="dashboard" type="button"><span class="nav-icon">⌂</span><span>Home</span></button>
+      <button class="nav-item" data-view="prospects" type="button"><span class="nav-icon">▤</span><span>Prospects</span></button>
+      <button class="nav-item" data-view="followups" type="button"><span class="nav-icon">◷</span><span>Follow-ups</span><span class="nav-dot" id="navDueDot" hidden></span></button>
+    </nav>
+  </div>
+
+  <dialog id="prospectDialog" class="prospect-dialog">
+    <form id="prospectForm" novalidate>
+      <div class="dialog-heading"><div><p class="eyebrow" id="dialogEyebrow">NEW ENTRY</p><h2 id="dialogTitle">Add prospect</h2><p class="dialog-subtitle">Add the details you need to follow up.</p></div><button class="icon-btn close-btn" id="closeDialog" type="button" aria-label="Close">×</button></div>
+      <input id="prospectId" type="hidden">
+      <div class="form-grid">
+        <label class="field span-2"><span>Full name <b>*</b></span><input id="prospectName" name="name" required maxlength="100" placeholder="e.g. Priya Sharma"></label>
+        <label class="field"><span>Company</span><input id="prospectCompany" name="company" maxlength="100" placeholder="Company or business"></label>
+        <label class="field"><span>Phone number</span><input id="prospectPhone" name="phone" type="tel" maxlength="40" placeholder="Phone number"></label>
+        <label class="field"><span>Status</span><select id="prospectStatus" name="status"><option>New</option><option>Contacted</option><option>Interested</option><option>Converted</option><option>Not interested</option></select></label>
+        <label class="field"><span>Next follow-up</span><input id="prospectFollowup" name="followup" type="date"></label>
+        <label class="field span-2"><span>Notes</span><textarea id="prospectNotes" name="notes" rows="3" maxlength="2000" placeholder="Last conversation, needs, or next step…"></textarea></label>
+      </div>
+      <p class="form-error" id="formError" role="alert"></p>
+      <div class="dialog-actions"><button class="secondary-btn" id="cancelDialog" type="button">Cancel</button><button class="primary-btn" type="submit" id="saveProspect">Save prospect</button></div>
+    </form>
+  </dialog>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <script src="app.js"></script>
+</body>
+</html>
